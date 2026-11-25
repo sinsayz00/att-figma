@@ -66,7 +66,7 @@
 <p class="side">AI ATTENDANCE</p>
 <p class="footer">대리출석 방지 AI 출석 체크기</p>
 <div class="hd"><span class="no">01</span><span class="en">OVERVIEW</span></div>
-<p class="ko"><span class="tag">프로젝트 개요</span>팀 구성과 제작 일정</p>
+<div class="kh"><p class="tag">프로젝트 개요</p><p class="kt">팀 구성과 제작 일정</p></div>
 <div class="sched">
 <div class="sr sh"><div class="sc c"><p>기간</p></div><div class="sc c"><p>단계</p></div><div class="sc c"><p>내용</p></div><div class="sc c"><p>담당</p></div></div>
 <div class="sr"><div class="sc"><p class="d">11.16 ~ 11.21</p></div><div class="sc"><p class="s">프로젝트 기획 및 주제 확정</p></div><div class="sc"><p class="x">후보 주제 5개 · 대리출석 방지 AI 출석 체크기</p></div><div class="sc c"><p class="w" style="background:#1A344D;color:#FFFFFF">팀 전체</p></div></div>
@@ -84,7 +84,7 @@
 <p class="side">AI ATTENDANCE</p>
 <p class="footer">대리출석 방지 AI 출석 체크기</p>
 <div class="hd"><span class="no">01</span><span class="en">OVERVIEW</span></div>
-<p class="ko"><span class="tag">프로젝트 개요</span>문제와 해결 방향</p>
+<div class="kh"><p class="tag">프로젝트 개요</p><p class="kt">문제와 해결 방향</p></div>
 <p style="font-size:30px;font-weight:700;color:#2B2D30;margin:-12px 0 32px">카드 한 장, 사진 한 장으로는 통과할 수 없게</p>
 <div class="split" style="height:520px">
 <div class="gap-note" style="display:flex;flex-direction:column;justify-content:center">
@@ -113,7 +113,7 @@
 <p class="side">AI ATTENDANCE</p>
 <p class="footer">대리출석 방지 AI 출석 체크기</p>
 <div class="hd"><span class="no">02</span><span class="en">SYSTEM</span></div>
-<p class="ko"><span class="tag">시스템 구성</span>판단은 micro:bit, 기록은 ESP32</p>
+<div class="kh"><p class="tag">시스템 구성</p><p class="kt">판단은 micro:bit, 기록은 ESP32</p></div>
 <div class="bd" style="height:500px">
 <div class="sensors" style="width:350px">
 <p style="font-size:24px;font-weight:700;color:#2B2D30">센서 · micro:bit에 연결</p>
@@ -153,7 +153,7 @@
 <p class="side">AI ATTENDANCE</p>
 <p class="footer">대리출석 방지 AI 출석 체크기</p>
 <div class="hd"><span class="no">02</span><span class="en">SYSTEM</span></div>
-<p class="ko"><span class="tag">시스템 구성</span>하드웨어 배선</p>
+<div class="kh"><p class="tag">시스템 구성</p><p class="kt">하드웨어 배선</p></div>
 <div class="row" style="gap:40px;align-items:flex-start">
 <div style="width:1120px">
 <div class="gt">
@@ -185,9 +185,9 @@
 <p class="side">AI ATTENDANCE</p>
 <p class="footer">대리출석 방지 AI 출석 체크기</p>
 <div class="hd"><span class="no">03</span><span class="en">DECISION</span></div>
-<p class="ko"><span class="tag">출석 판정</span>7단계 판정 흐름</p>
+<div class="kh"><p class="tag">출석 판정</p><p class="kt">7단계 판정 흐름</p></div>
 <div class="flow flow7" style="height:470px">
-<div class="step" style="flex:none;width:170px"><p class="num">①</p><h3>카드 확인</h3><p class="d">등록된<br>학생증인가</p><p class="ng"><span class="chip-k" style="font-size:24px">NG,CARD</span></p></div><div class="arrow" style="width:56px"><svg aria-label="오른쪽 화살표" viewBox="0 0 44 20" width="44" height="20" style="width:44px;height:20px"><line x1="2" y1="10" x2="40" y2="10" stroke="#2B2D30" stroke-width="2"/><polyline points="32,3 41,10 32,17" fill="none" stroke="#2B2D30" stroke-width="2"/></svg></div><div class="step" style="flex:none;width:280px"><p class="num">②③④</p><h3>얼굴 확인</h3><p class="d">카드 번호와 같은 얼굴<br>화면 가운데<br>거리 18 ~ 35cm<br>연속 2회 (10초 안)</p><p class="ng"><span class="chip-k" style="font-size:24px">NG,DUP</span></p></div><div class="arrow" style="width:56px"><svg aria-label="오른쪽 화살표" viewBox="0 0 44 20" width="44" height="20" style="width:44px;height:20px"><line x1="2" y1="10" x2="40" y2="10" stroke="#2B2D30" stroke-width="2"/><polyline points="32,3 41,10 32,17" fill="none" stroke="#2B2D30" stroke-width="2"/></svg></div><div class="step" style="flex:none;width:290px"><p class="num">⑤</p><h3>거리 측정</h3><p class="d">초음파 센서로<br>5회 측정 후<br>중앙값만 사용</p><p class="ng"><span class="chip-k" style="font-size:24px">NG,FACE·TIMEOUT</span></p></div><div class="arrow" style="width:56px"><svg aria-label="오른쪽 화살표" viewBox="0 0 44 20" width="44" height="20" style="width:44px;height:20px"><line x1="2" y1="10" x2="40" y2="10" stroke="#2B2D30" stroke-width="2"/><polyline points="32,3 41,10 32,17" fill="none" stroke="#2B2D30" stroke-width="2"/></svg></div><div class="step key" style="flex:none;width:206px"><p class="num">⑥</p><h3>얼굴 크기 K</h3><p class="d">박스 폭 × 거리<br>24,000 ~ 45,000</p><p class="ng"><span class="chip-k" style="font-size:24px">NG,SIZE</span></p></div><div class="arrow" style="width:56px"><svg aria-label="오른쪽 화살표" viewBox="0 0 44 20" width="44" height="20" style="width:44px;height:20px"><line x1="2" y1="10" x2="40" y2="10" stroke="#2B2D30" stroke-width="2"/><polyline points="32,3 41,10 32,17" fill="none" stroke="#2B2D30" stroke-width="2"/></svg></div><div class="step key" style="flex:none;width:190px"><p class="num">⑦</p><h3>피부 온도</h3><p class="d">5회 측정해<br>사람 피부와 비교</p><p class="ng"><span class="chip-k" style="font-size:24px">NG,TEMP</span></p></div>
+<div class="step" style="flex:none;width:218px;box-sizing:border-box"><p class="num">①</p><h3>카드 확인</h3><p class="d">등록된<br>학생증인가</p><p class="chip-k ngc">NG,CARD</p></div><div class="arrow" style="width:56px"><svg aria-label="오른쪽 화살표" viewBox="0 0 44 20" width="44" height="20" style="width:44px;height:20px"><line x1="2" y1="10" x2="40" y2="10" stroke="#2B2D30" stroke-width="2"/><polyline points="32,3 41,10 32,17" fill="none" stroke="#2B2D30" stroke-width="2"/></svg></div><div class="step" style="flex:none;width:328px;box-sizing:border-box"><p class="num">②③④</p><h3>얼굴 확인</h3><p class="d">카드 번호와 같은 얼굴<br>화면 가운데<br>거리 18 ~ 35cm<br>연속 2회 (10초 안)</p><p class="chip-k ngc">NG,DUP</p></div><div class="arrow" style="width:56px"><svg aria-label="오른쪽 화살표" viewBox="0 0 44 20" width="44" height="20" style="width:44px;height:20px"><line x1="2" y1="10" x2="40" y2="10" stroke="#2B2D30" stroke-width="2"/><polyline points="32,3 41,10 32,17" fill="none" stroke="#2B2D30" stroke-width="2"/></svg></div><div class="step" style="flex:none;width:338px;box-sizing:border-box"><p class="num">⑤</p><h3>거리 측정</h3><p class="d">초음파 센서로<br>5회 측정 후<br>중앙값만 사용</p><p class="chip-k ngc">NG,FACE·TIMEOUT</p></div><div class="arrow" style="width:56px"><svg aria-label="오른쪽 화살표" viewBox="0 0 44 20" width="44" height="20" style="width:44px;height:20px"><line x1="2" y1="10" x2="40" y2="10" stroke="#2B2D30" stroke-width="2"/><polyline points="32,3 41,10 32,17" fill="none" stroke="#2B2D30" stroke-width="2"/></svg></div><div class="step key" style="flex:none;width:254px;box-sizing:border-box"><p class="num">⑥</p><h3>얼굴 크기 K</h3><p class="d">박스 폭 × 거리<br>24,000 ~ 45,000</p><p class="chip-k ngc">NG,SIZE</p></div><div class="arrow" style="width:56px"><svg aria-label="오른쪽 화살표" viewBox="0 0 44 20" width="44" height="20" style="width:44px;height:20px"><line x1="2" y1="10" x2="40" y2="10" stroke="#2B2D30" stroke-width="2"/><polyline points="32,3 41,10 32,17" fill="none" stroke="#2B2D30" stroke-width="2"/></svg></div><div class="step key" style="flex:none;width:238px;box-sizing:border-box"><p class="num">⑦</p><h3>피부 온도</h3><p class="d">5회 측정해<br>사람 피부와 비교</p><p class="chip-k ngc">NG,TEMP</p></div>
 </div>
 <div class="res">
 <div class="ok"><p><b>모두 통과</b> &nbsp; <span class="code" style="font-size:26px;color:#FFFFFF">ATT,n,OK</span> · LED O · 띠링</p></div>
@@ -201,7 +201,7 @@
 <p class="side">AI ATTENDANCE</p>
 <p class="footer">대리출석 방지 AI 출석 체크기</p>
 <div class="hd"><span class="no">03</span><span class="en">DECISION</span></div>
-<p class="ko"><span class="tag">출석 판정</span>사진 위조를 거르는 두 가지 지표</p>
+<div class="kh"><p class="tag">출석 판정</p><p class="kt">사진 위조를 거르는 두 가지 지표</p></div>
 <div class="two" style="gap:40px;height:590px">
 <div class="card col" style="gap:20px;padding:40px 44px;justify-content:space-between">
 <h3 style="margin:0">⑥ 얼굴 크기 K</h3>
@@ -230,7 +230,7 @@
 <p class="side">AI ATTENDANCE</p>
 <p class="footer">대리출석 방지 AI 출석 체크기</p>
 <div class="hd"><span class="no">04</span><span class="en">COMMUNICATION</span></div>
-<p class="ko"><span class="tag">통신과 기록</span>두 보드의 한 줄 메시지</p>
+<div class="kh"><p class="tag">통신과 기록</p><p class="kt">두 보드의 한 줄 메시지</p></div>
 <div class="row" style="gap:36px;align-items:stretch">
 <div style="width:1100px">
 <div class="gt">
@@ -261,7 +261,7 @@
 <p class="side">AI ATTENDANCE</p>
 <p class="footer">대리출석 방지 AI 출석 체크기</p>
 <div class="hd"><span class="no">04</span><span class="en">COMMUNICATION</span></div>
-<p class="ko"><span class="tag">통신과 기록</span>ESP32-S3-CAM이 맡는 일</p>
+<div class="kh"><p class="tag">통신과 기록</p><p class="kt">ESP32-S3-CAM이 맡는 일</p></div>
 <div class="grid2" style="gap:24px">
 <div class="card" style="padding:32px 44px"><div class="ic"><svg aria-label="카메라 아이콘" viewBox="0 0 32 32" width="38" height="38" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="26" height="17" rx="3"/><path d="M11 10 L13 6 H19 L21 10"/><circle cx="16" cy="18.5" r="5"/></svg></div><h3>출석 사진</h3><p class="sub" style="line-height:1.6">판정 순간 카메라로 촬영해 SD 카드에 저장 (SD가 없으면 메모리에 10장)</p></div>
 <div class="card" style="padding:32px 44px"><div class="ic"><svg aria-label="파일 아이콘" viewBox="0 0 32 32" width="38" height="38" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 H19 L25 9 V29 H8 Z"/><polyline points="19,3 19,9 25,9"/><line x1="12" y1="16" x2="21" y2="16"/><line x1="12" y1="21" x2="21" y2="21"/></svg></div><h3>출석 기록</h3><p class="sub" style="line-height:1.6">SD 카드에 CSV로 남기고, 느린 구글 시트 전송은 별도 태스크가 맡아 응답이 늦어지지 않음</p></div>
@@ -276,7 +276,7 @@
 <p class="side">AI ATTENDANCE</p>
 <p class="footer">대리출석 방지 AI 출석 체크기</p>
 <div class="hd"><span class="no">05</span><span class="en">RESULT</span></div>
-<p class="ko"><span class="tag">결과와 계획</span>제품 3D 모델 · 360° 회전</p>
+<div class="kh"><p class="tag">결과와 계획</p><p class="kt">제품 3D 모델 · 360° 회전</p></div>
 <div class="m3d">
 <iframe class="vid" src="model/index.html" title="제품 3D 모델 (마우스로 회전)" style="border:0;display:block;background:#F2F2F1"></iframe>
 <div class="rv">
@@ -293,7 +293,7 @@
 <p class="side">AI ATTENDANCE</p>
 <p class="footer">대리출석 방지 AI 출석 체크기</p>
 <div class="hd"><span class="no">05</span><span class="en">RESULT</span></div>
-<p class="ko"><span class="tag">결과와 계획</span>제품 외관 4면도</p>
+<div class="kh"><p class="tag">결과와 계획</p><p class="kt">제품 외관 4면도</p></div>
 <div class="views4">
 <div class="vc"><img src="images/img_11.png" alt="제품 사시도 라인 드로잉"><p class="vn">사시도</p></div>
 <div class="vc"><img src="images/img_12.png" alt="제품 정면도 라인 드로잉"><p class="vn">정면</p></div>
@@ -308,7 +308,7 @@
 <p class="side">AI ATTENDANCE</p>
 <p class="footer">대리출석 방지 AI 출석 체크기</p>
 <div class="hd"><span class="no">05</span><span class="en">RESULT</span></div>
-<p class="ko"><span class="tag">결과와 계획</span>제품 내부 구성도</p>
+<div class="kh"><p class="tag">결과와 계획</p><p class="kt">제품 내부 구성도</p></div>
 <div class="views3">
 <div class="vc"><img src="images/img_15.png" alt="덮개를 연 제품 내부 사시도 라인 드로잉"><p class="vn">내부 사시도</p></div>
 <div class="vc"><img src="images/img_16.png" alt="제품 내부 측면도 라인 드로잉"><p class="vn">측면</p></div>
@@ -322,7 +322,7 @@
 <p class="side">AI ATTENDANCE</p>
 <p class="footer">대리출석 방지 AI 출석 체크기</p>
 <div class="hd"><span class="no">05</span><span class="en">RESULT</span></div>
-<p class="ko"><span class="tag">결과와 계획</span>설계에서 실물로</p>
+<div class="kh"><p class="tag">결과와 계획</p><p class="kt">설계에서 실물로</p></div>
 <div class="proto3">
 <div><img class="pe" src="images/img_18.png" alt="예상 모형: 부품을 노출한 시험용 배치"><div class="cap"><h3>예상 모형</h3><p>부품을 노출한 시험용 배치</p></div></div>
 <div style="display:flex;justify-content:center"><svg aria-label="오른쪽 화살표" viewBox="0 0 70 20" width="70" height="20" style="width:70px;height:20px"><line x1="2" y1="10" x2="66" y2="10" stroke="#2B2D30" stroke-width="2"/><polyline points="58,3 67,10 58,17" fill="none" stroke="#2B2D30" stroke-width="2"/></svg></div>
@@ -342,10 +342,10 @@
 <p class="side">AI ATTENDANCE</p>
 <p class="footer">대리출석 방지 AI 출석 체크기</p>
 <div class="hd"><span class="no">05</span><span class="en">RESULT</span></div>
-<p class="ko"><span class="tag">결과와 계획</span>기대 효과와 보완점</p>
+<div class="kh"><p class="tag">결과와 계획</p><p class="kt">기대 효과와 보완점</p></div>
 <div class="ol" style="height:580px">
-<div class="card"><p style="margin-bottom:28px"><span class="chip-y" style="font-size:26px;background:#B04434">기대 효과</span></p><div class="row1"><p class="n">01</p><p class="t1">카드 태그와 얼굴 확인만으로 빠르게 출석</p></div><div class="row1"><p class="n">02</p><p class="t1">대리출석과 사진 위조를 단계별로 차단</p></div><div class="row1"><p class="n">03</p><p class="t1">AI 인식의 약점과 대응책을 실험 수치로 제시</p></div></div>
-<div class="card"><p style="margin-bottom:28px"><span class="chip-k" style="font-size:26px">보완점</span></p><div class="row1"><p class="n">01</p><p class="t1">실제 얼굴 크기 이상의 태블릿 화면을 활용한 얼굴 사진으로 출석 인정 가능</p></div><div class="row1"><p class="n">02</p><p class="t1">출석 확인 후 스냅샷을 촬영하여 관리자에게 전송 및 보관</p></div><div class="row1"><p class="n">03</p><p class="t1">관리자의 2차 확인 통해 출석 인증의 신뢰성 보완</p></div></div>
+<div class="card"><p class="chip-y pill" style="background:#B04434">기대 효과</p><div class="row1"><p class="n">01</p><p class="t1">카드 태그와 얼굴 확인만으로 빠르게 출석</p></div><div class="row1"><p class="n">02</p><p class="t1">대리출석과 사진 위조를 단계별로 차단</p></div><div class="row1"><p class="n">03</p><p class="t1">AI 인식의 약점과 대응책을 실험 수치로 제시</p></div></div>
+<div class="card"><p class="chip-k pill">보완점</p><div class="row1"><p class="n">01</p><p class="t1">실제 얼굴 크기 이상의 태블릿 화면을 활용한 얼굴 사진으로 출석 인정 가능</p></div><div class="row1"><p class="n">02</p><p class="t1">출석 확인 후 스냅샷을 촬영하여 관리자에게 전송 및 보관</p></div><div class="row1"><p class="n">03</p><p class="t1">관리자의 2차 확인 통해 출석 인증의 신뢰성 보완</p></div></div>
 </div>
 </section>
 
