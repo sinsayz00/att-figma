@@ -6,6 +6,13 @@
 <title>대리출석 방지 AI 출석 체크기 (2차)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="css/style.css">
+<style>
+body.pm{background:#111!important;overflow:hidden;height:100vh;display:block!important;padding:0!important;gap:0!important}
+body.pm > section{position:absolute!important;left:50%;top:50%;transform-origin:center center;display:none!important}
+body.pm > section.on{display:flex!important}
+#pg{position:fixed;right:18px;bottom:12px;font:14px/1 Arial,sans-serif;color:#888;z-index:9;user-select:none;display:none}
+body.pm #pg{display:block}
+</style>
 </head>
 <body>
 <section id="cover" data-name="01_cover" class="cover bp">
@@ -385,5 +392,27 @@
 <div class="bpc r" style="left:680px;top:950px;width:1100px"><p class="b">52612584 김재현 · 52612597 김지성 · 52612665 신미선 · 52612681 윤재호</p></div>
 </section>
 
+<div id="pg"></div>
+<script>
+(function(){
+  var S=[].slice.call(document.querySelectorAll('body > section')), i=0, pg=document.getElementById('pg'), B=document.body;
+  function fit(){ if(!B.classList.contains('pm')) return; var k=Math.min(innerWidth/1920, innerHeight/1080);
+    S.forEach(function(s){ s.style.transform='translate(-50%,-50%) scale('+k+')'; }); }
+  function nearest(){ var best=0,bd=1e9; S.forEach(function(s,j){ var d=Math.abs(s.getBoundingClientRect().top); if(d<bd){bd=d;best=j;} }); return best; }
+  function enter(){ if(B.classList.contains('pm')) return; i=nearest(); B.classList.add('pm'); fit(); go(i); }
+  function exit(){ B.classList.remove('pm'); S.forEach(function(s){ s.style.transform=''; s.classList.remove('on'); }); S[i].scrollIntoView(); }
+  function go(n){ i=Math.max(0,Math.min(S.length-1,n)); S.forEach(function(s,j){ s.classList.toggle('on', j===i); }); pg.textContent=(i+1)+' / '+S.length; }
+  addEventListener('keydown',function(e){
+    var k=e.key, nx=(k==='ArrowRight'||k==='PageDown'||k==='ArrowDown'||k===' '||k==='Enter'), pv=(k==='ArrowLeft'||k==='PageUp'||k==='ArrowUp'||k==='Backspace');
+    if(nx||pv){ e.preventDefault(); if(!B.classList.contains('pm')){ enter(); return; } go(i+(nx?1:-1)); }
+    else if(k==='Home'&&B.classList.contains('pm')){ go(0); } else if(k==='End'&&B.classList.contains('pm')){ go(S.length-1); }
+    else if(k==='f'||k==='F'||k==='F5'){ e.preventDefault(); enter(); var d=document.documentElement; if(!(document.fullscreenElement||document.webkitFullscreenElement)){ if(d.requestFullscreen) d.requestFullscreen().catch(function(){}); else if(d.webkitRequestFullscreen) d.webkitRequestFullscreen(); } }
+    else if(k==='Escape'&&B.classList.contains('pm')&&!(document.fullscreenElement||document.webkitFullscreenElement)){ exit(); }
+  });
+  addEventListener('click',function(e){ if(!B.classList.contains('pm')||e.target.closest('iframe')) return; if(e.clientX>innerWidth/2) go(i+1); else go(i-1); });
+  addEventListener('blur',function(){ setTimeout(function(){ if(document.activeElement&&document.activeElement.tagName==='IFRAME') window.focus(); },300); });
+  addEventListener('resize',fit);
+})();
+</script>
 </body>
 </html>

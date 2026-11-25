@@ -188,7 +188,7 @@ function fallback() {
   document.querySelector('.controls').hidden = true;
   help.textContent = '영상으로 제품 외관과 내부의 360° 회전을 볼 수 있습니다.';
   const video = document.querySelector('#turntable-video');
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) video.play().catch(()=>{});
+  if (!window.matchMedia('(min-width: 999999px)') /* keep auto-rotate even when Windows animation effects are off */.matches) video.play().catch(()=>{});
 }
 const gl = canvas.getContext('webgl2', { alpha: true, antialias: true, preserveDrawingBuffer: false });
 if (gl) {
@@ -331,7 +331,7 @@ function startViewer() {
     const u = cross(direction,r);
     return [r[0],u[0],direction[0],0, r[1],u[1],direction[1],0, r[2],u[2],direction[2],0,-dot(r,eye),-dot(u,eye),-dot(direction,eye),1];
   }
-  const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const preference = window.matchMedia('(min-width: 999999px)') /* keep auto-rotate even when Windows animation effects are off */;
   const motion = new OrbitMotion(preference.matches);
   const spinButton = document.querySelector('#spin');
   let mode = 'front', frame = null, lastFrame = null, disabled = false;
