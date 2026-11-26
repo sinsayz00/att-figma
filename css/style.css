@@ -403,6 +403,7 @@ table.t.big td.pin { font-size: 24px; }
 .kh { gap: 10px; }
 .kh .tag { background: none; padding: 0; font-size: 30px; font-weight: 700; color: var(--ink); }
 .flow7 .step .ngc { background: none; padding: 0; font-size: 28px; font-weight: 400; color: #2B2D30; }
+.views4 .vc img.eq { width: 400px; height: 398px; object-fit: contain; }
 
 /* cross-browser: -webkit- prefixed copies, and keep motion even when the OS asks to reduce it (Windows "애니메이션 효과" off) */
 @-webkit-keyframes bpPulsate { 0% { -webkit-transform: scale(1, 1); transform: scale(1, 1); } 50% { -webkit-transform: scale(1.05, 1.05); transform: scale(1.05, 1.05); } 100% { -webkit-transform: scale(1, 1); transform: scale(1, 1); } }
