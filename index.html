@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=2080">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>대리출석 방지 AI 출석 체크기 (2차)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap">
 <meta property="og:type" content="website">
@@ -14,10 +14,14 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="css/style.css">
 <style>
-body.pm{background:#111!important;overflow:hidden;height:100vh;display:block!important;padding:0!important;gap:0!important}
-body.pm > section{position:absolute!important;left:50%;top:50%;transform-origin:center center;display:none!important}
+body.mob{gap:14px!important;padding:14px 0!important}
+#hint{box-sizing:border-box;display:none;position:sticky;top:0;z-index:20;width:100%;background:#1A344D;color:#fff;font:600 14px/1.4 -apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;text-align:center;padding:9px 12px}
+body.mob.portrait #hint{display:block}
+body.pm{background:#111!important;overflow:hidden;height:100vh;height:100dvh;display:block!important;padding:0!important;gap:0!important}
+body.pm #hint{display:none!important}
+body.pm > section{position:absolute!important;left:50%;top:50%;transform-origin:center center;display:none!important;zoom:1!important}
 body.pm > section.on{display:flex!important}
-#pg{position:fixed;right:18px;bottom:12px;font:14px/1 Arial,sans-serif;color:#888;z-index:9;user-select:none;display:none}
+#pg{position:fixed;right:14px;bottom:10px;font:13px/1 Arial,sans-serif;color:#888;z-index:9;user-select:none;display:none}
 body.pm #pg{display:block}
 </style>
 </head>
@@ -402,23 +406,41 @@ body.pm #pg{display:block}
 <div id="pg"></div>
 <script>
 (function(){
+  var AUTO=false;
   var S=[].slice.call(document.querySelectorAll('body > section')), i=0, pg=document.getElementById('pg'), B=document.body;
+  var hint=document.createElement('div'); hint.id='hint'; hint.textContent='휴대폰을 가로로 돌리면 한 장씩 크게 볼 수 있어요'; B.insertBefore(hint,B.firstChild);
+  function W(){ return document.documentElement.clientWidth; }
+  function isPortraitPhone(){ return innerHeight>innerWidth && innerWidth<1024; }
+  function mfit(){ if(B.classList.contains('pm')) return; var w=W(), mob=w<2080;
+    B.classList.toggle('mob',mob); B.classList.toggle('portrait',isPortraitPhone());
+    var z=mob?Math.max(0.1,(w-16)/1920):1; S.forEach(function(s){ s.style.zoom=(z===1?'':z); }); }
   function fit(){ if(!B.classList.contains('pm')) return; var k=Math.min(innerWidth/1920, innerHeight/1080);
     S.forEach(function(s){ s.style.transform='translate(-50%,-50%) scale('+k+')'; }); }
   function nearest(){ var best=0,bd=1e9; S.forEach(function(s,j){ var d=Math.abs(s.getBoundingClientRect().top); if(d<bd){bd=d;best=j;} }); return best; }
-  function enter(){ if(B.classList.contains('pm')) return; i=nearest(); B.classList.add('pm'); fit(); go(i); }
-  function exit(){ B.classList.remove('pm'); S.forEach(function(s){ s.style.transform=''; s.classList.remove('on'); }); S[i].scrollIntoView(); }
-  function go(n){ i=Math.max(0,Math.min(S.length-1,n)); S.forEach(function(s,j){ s.classList.toggle('on', j===i); }); pg.textContent=(i+1)+' / '+S.length; }
+  function enter(n){ if(B.classList.contains('pm')) return; i=(n==null)?nearest():n; S.forEach(function(s){ s.style.zoom=''; }); B.classList.add('pm'); fit(); go(i); }
+  function exit(){ if(!B.classList.contains('pm')) return; B.classList.remove('pm'); S.forEach(function(s){ s.style.transform=''; s.classList.remove('on'); }); mfit(); S[i].scrollIntoView(); }
+  function go(n){ i=Math.max(0,Math.min(S.length-1,n)); S.forEach(function(s,j){ s.classList.toggle('on', j===i); }); pg.textContent=(i+1)+' / '+S.length; if(AUTO) history.replaceState(null,'','#'+(i+1)); }
+  function fs(){ var d=document.documentElement; if(!(document.fullscreenElement||document.webkitFullscreenElement)){ if(d.requestFullscreen) d.requestFullscreen().catch(function(){}); else if(d.webkitRequestFullscreen) d.webkitRequestFullscreen(); } }
   addEventListener('keydown',function(e){
     var k=e.key, nx=(k==='ArrowRight'||k==='PageDown'||k==='ArrowDown'||k===' '||k==='Enter'), pv=(k==='ArrowLeft'||k==='PageUp'||k==='ArrowUp'||k==='Backspace');
     if(nx||pv){ e.preventDefault(); if(!B.classList.contains('pm')){ enter(); return; } go(i+(nx?1:-1)); }
     else if(k==='Home'&&B.classList.contains('pm')){ go(0); } else if(k==='End'&&B.classList.contains('pm')){ go(S.length-1); }
-    else if(k==='f'||k==='F'||k==='F5'){ e.preventDefault(); enter(); var d=document.documentElement; if(!(document.fullscreenElement||document.webkitFullscreenElement)){ if(d.requestFullscreen) d.requestFullscreen().catch(function(){}); else if(d.webkitRequestFullscreen) d.webkitRequestFullscreen(); } }
-    else if(k==='Escape'&&B.classList.contains('pm')&&!(document.fullscreenElement||document.webkitFullscreenElement)){ exit(); }
+    else if(k==='f'||k==='F'||k==='F5'){ e.preventDefault(); enter(); fs(); }
+    else if(k==='Escape'&&B.classList.contains('pm')&&!AUTO&&!(document.fullscreenElement||document.webkitFullscreenElement)){ exit(); }
   });
   addEventListener('click',function(e){ if(!B.classList.contains('pm')||e.target.closest('iframe')) return; if(e.clientX>innerWidth/2) go(i+1); else go(i-1); });
+  var tx=null,ty=null;
+  addEventListener('touchstart',function(e){ if(!B.classList.contains('pm')) return; var t=e.changedTouches[0]; tx=t.clientX; ty=t.clientY; },{passive:true});
+  addEventListener('touchend',function(e){ if(!B.classList.contains('pm')||tx===null) return; var t=e.changedTouches[0], dx=t.clientX-tx, dy=t.clientY-ty; tx=null;
+    if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){ go(i+(dx<0?1:-1)); } },{passive:true});
   addEventListener('blur',function(){ setTimeout(function(){ if(document.activeElement&&document.activeElement.tagName==='IFRAME') window.focus(); },300); });
-  addEventListener('resize',fit);
+  function layout(){
+    if(AUTO){ if(isPortraitPhone()){ exit(); mfit(); } else { if(!B.classList.contains('pm')) enter(i); fit(); } }
+    else { mfit(); fit(); }
+  }
+  addEventListener('resize',layout); addEventListener('orientationchange',function(){ setTimeout(layout,200); });
+  i=Math.max(0,(parseInt(location.hash.slice(1),10)||1)-1);
+  mfit(); layout(); if(!B.classList.contains('pm')&&location.hash) S[i].scrollIntoView();
 })();
 </script>
 </body>
