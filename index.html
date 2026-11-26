@@ -23,6 +23,10 @@ body.pm > section{position:absolute!important;left:50%;top:50%;transform-origin:
 body.pm > section.on{display:flex!important}
 #pg{position:fixed;right:14px;bottom:10px;font:13px/1 Arial,sans-serif;color:#888;z-index:9;user-select:none;display:none}
 body.pm #pg{display:block}
+body.pm > section{cursor:pointer}
+.nb{display:none;position:fixed;bottom:12px;z-index:30;width:52px;height:52px;border-radius:50%;border:0;background:rgba(26,52,77,.82);color:#fff;font:700 26px/52px Arial,sans-serif;text-align:center;padding:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+#nbp{left:12px} #nbn{right:12px}
+@media (pointer:coarse){ body.pm .nb{display:block} body.pm #pg{bottom:auto;top:10px} }
 </style>
 </head>
 <body>
@@ -406,8 +410,10 @@ body.pm #pg{display:block}
 <div id="pg"></div>
 <script>
 (function(){
-  var AUTO=false;
+  var AUTO=false || matchMedia('(pointer:coarse)').matches;
   var S=[].slice.call(document.querySelectorAll('body > section')), i=0, pg=document.getElementById('pg'), B=document.body;
+  var bp=document.createElement('button'), bn=document.createElement('button'); bp.className=bn.className='nb'; bp.id='nbp'; bn.id='nbn'; bp.textContent='‹'; bn.textContent='›'; bp.setAttribute('aria-label','이전'); bn.setAttribute('aria-label','다음'); B.appendChild(bp); B.appendChild(bn);
+  bp.addEventListener('click',function(e){ e.stopPropagation(); go(i-1); }); bn.addEventListener('click',function(e){ e.stopPropagation(); go(i+1); });
   var hint=document.createElement('div'); hint.id='hint'; hint.textContent='휴대폰을 가로로 돌리면 한 장씩 크게 볼 수 있어요'; B.insertBefore(hint,B.firstChild);
   function W(){ return document.documentElement.clientWidth; }
   function isPortraitPhone(){ return innerHeight>innerWidth && innerWidth<1024; }
@@ -430,8 +436,8 @@ body.pm #pg{display:block}
   });
   addEventListener('click',function(e){ if(!B.classList.contains('pm')||e.target.closest('iframe')) return; if(e.clientX>innerWidth/2) go(i+1); else go(i-1); });
   var tx=null,ty=null;
-  addEventListener('touchstart',function(e){ if(!B.classList.contains('pm')) return; var t=e.changedTouches[0]; tx=t.clientX; ty=t.clientY; },{passive:true});
-  addEventListener('touchend',function(e){ if(!B.classList.contains('pm')||tx===null) return; var t=e.changedTouches[0], dx=t.clientX-tx, dy=t.clientY-ty; tx=null;
+  document.addEventListener('touchstart',function(e){ if(!B.classList.contains('pm')||e.target.closest('.nb')) return; var t=e.changedTouches[0]; tx=t.clientX; ty=t.clientY; },{passive:true});
+  document.addEventListener('touchend',function(e){ if(!B.classList.contains('pm')||tx===null) return; var t=e.changedTouches[0], dx=t.clientX-tx, dy=t.clientY-ty; tx=null;
     if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){ go(i+(dx<0?1:-1)); } },{passive:true});
   addEventListener('blur',function(){ setTimeout(function(){ if(document.activeElement&&document.activeElement.tagName==='IFRAME') window.focus(); },300); });
   function layout(){
